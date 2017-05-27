@@ -1,0 +1,60 @@
+package Sample;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class anagramFinder{
+
+	public static Map<String, List<String>> anagramFind(String[] array) {
+
+		Map<String, List<String>> anagramList = null;
+
+		if (array.length == 0) {
+			return null;
+
+		}
+		anagramList = new HashMap<String, List<String>>();
+		for (String word : array) {
+			char[] charArray = word.toCharArray();
+			Arrays.sort(charArray);
+			String sorted = String.copyValueOf(charArray);
+
+			if (anagramList.containsKey(sorted)) {
+				List<String> valList = anagramList.get(sorted);
+				valList.add(word);
+				anagramList.put(sorted, valList);
+			}
+
+			else {
+				List<String> valList = new ArrayList<String>();
+				valList.add(word);
+				anagramList.put(sorted, valList);
+			}
+
+		}
+		return anagramList;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String[] array = { "teaching", "cheating", "eat", "cap", "ate",
+				"monkey", "tea" };
+
+		for (List<String> vals : anagramFind(array).values()) {
+
+			if (vals.size() != 1) {
+
+				for (String val : vals) {
+					System.out.print(val + " ");
+
+				}
+				System.out.println(" ");
+			}
+		}
+
+	}
+
+}
