@@ -1,0 +1,57 @@
+package sortingSearching;
+
+import java.util.Scanner;
+
+public class QuickSort {
+
+	public static int[] quickSort(int A[], int start, int end)
+	{
+		int pIndex;
+		if(start<end){
+			pIndex=Partition(A, start, end);
+			quickSort(A,start, pIndex-1);
+			quickSort(A, pIndex+1, end);
+		}
+		return A;
+	}
+	
+	public static int Partition(int A[], int start, int end)
+	{
+		int pIndex=start;
+		int pivot=A[end-1];
+			for(int i=0;i<end;i++){
+				if(A[i]<pivot){
+					int temp=A[i];
+					A[i]=A[pIndex];
+					A[pIndex]=temp;	
+					pIndex++;
+				}
+			}
+			int temp=A[pIndex];
+			A[pIndex]=A[end];
+			A[end]=temp;
+			
+		return pIndex;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		int val=sc.nextInt();
+		System.out.println(val);
+		int[] array=new int[val];
+		for(int i=0;i<val;i++){
+			array[i]=(int)(Math.random()*10);
+			System.out.print(array[i]+" ");
+			
+		}
+		System.out.println("\n The values are: ");
+		array=quickSort(array, 0, val-1);
+		for(int i: array){
+			System.out.print(" "+ i);
+			
+		}
+	}
+
+}
