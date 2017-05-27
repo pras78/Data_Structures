@@ -1,0 +1,121 @@
+package tree;
+
+public class BinaryTree {
+
+	// add node, delete node and traverse node
+	Node root;
+
+	// adding a node. involved methods:
+	// addNode and traverseAndAddNode
+	public void addNode(int data) {
+		Node newNode = new Node(data);
+		if (root == null) {
+			root = newNode;
+		} else {
+			traverseAndAddNode(root, newNode);
+		}
+	}
+
+	public void traverseAndAddNode(Node node, Node newNode) {
+
+		if (newNode.data < node.data) {
+			if (node.leftChild == null) {
+				node.leftChild = newNode;
+			} else {
+				traverseAndAddNode(node.leftChild, newNode);
+			}
+		} else if (newNode.data > node.data) {
+			if (node.rightChild == null) {
+				node.rightChild = newNode;
+			} else {
+				traverseAndAddNode(node.rightChild, newNode);
+			}
+
+		}
+	}
+
+	
+
+	// Displaying nodes in the tree. Involved methods:
+	// displayNode
+	public void displayNode(Node root) {
+		if (root != null) {
+
+			displayNode(root.leftChild);
+
+			System.out.println(" " + root.data);
+
+			displayNode(root.rightChild);
+		}
+
+	}
+
+	// this method is to find the key inside the tree created. Methods involved:
+	// findNode
+	public boolean findNode(int key) {
+		Node current = root;
+		while (current != null) {
+			if (current.data == key) {
+
+				System.out.println(key + ": key found");
+				return true;
+			} else if (key > current.data) {
+				current = current.rightChild;
+			} else if (key < root.data) {
+
+				current = current.leftChild;
+			}
+		}
+		return false;
+	}
+
+	public void deleteNode(int key) {
+		Node current;
+		Node parent;
+		if (root != null) {
+			boolean isExists = findNode(key);
+			System.out.println("the node exists: " + isExists);
+			current = root;
+			parent = root;
+			if (isExists) {
+				test: while (current != null) {
+					// parent=current;
+					if (key == current.data) {
+						if (current.leftChild == null
+								&& current.rightChild == null) {
+							System.out.println(current.data
+									+ " here is current");
+							testing = null;
+
+							break test;
+						}
+					} else if (key < current.data) {
+						current = current.leftChild;
+					} else if (key > current.data) {
+						current = current.rightChild;
+
+					}
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		BinaryTree bt = new BinaryTree();
+		bt.addNode(12);
+		bt.addNode(9);
+		bt.addNode(87);
+		bt.addNode(11);
+		bt.addNode(41);
+		bt.addNode(2);
+		System.out.println("The tree in sorted order:");
+		bt.displayNode(bt.root);
+		System.out.println("Finding the keys:");
+		bt.findNode(2);
+		bt.deleteNode(2);
+		bt.displayNode(bt.root);
+		
+	}
+
+}
