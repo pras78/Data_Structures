@@ -1,0 +1,103 @@
+package com.pallindromelinkedlist;
+
+public class Node {
+
+	Node next = null;
+	int data;
+
+	public Node() {
+
+	}
+
+	public Node(int d) {
+		data = d;
+	}
+
+	void appendToTail(int d) {
+		Node end = new Node(d);
+		Node n = this;
+
+		while (n.next != null) {
+			n = n.next;
+		}
+		n.next = end;
+	}
+
+	void displayNodes() {
+		Node n;
+		n = this;
+		if (n != null) {
+			do {// 55,
+				System.out.println(n.data);
+				n = n.next;
+			} while (n != null);
+		}
+	}
+
+	Node deleteNode(int d) {
+		Node head = this;
+		Node n = head;
+		if (n.data == d) {
+			return head.next;
+		}
+
+		while (n.next != null) {
+			if (n.next.data == d) {
+				n.next = n.next.next;
+				return head; // head didn't change
+			}
+			n = n.next;
+
+		}
+		return head;
+
+	}
+
+	// checking to see if is a Pallindrome or not
+	public void isPallindrome(Node n) {
+		int[] val = new int[3];
+		n = this;
+		int i = 0;
+		if (n != null) {
+			do {// 55,
+				System.out.println(n.data);
+				val[i] = n.data;
+				n = n.next;
+				i++;
+			} while (n != null && i < val.length);
+		}
+		System.out.println("values entered");
+		StringBuilder sb = new StringBuilder();
+
+		for (int j : val) {
+			System.out.println(j);
+			sb.append(String.valueOf(j));
+		}
+		String original = sb.toString();
+		String reversed = sb.reverse().toString();
+
+		if (original.equals(reversed)) {
+			System.out.println("the numbers are pallindrome");
+		} else {
+			System.out.println("Sorry not pallindrome");
+		}
+	}
+}
+//Class with Main method
+public class MainApp {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Node n=null;
+		n=new Node(12);
+		n.appendToTail(2);
+		n.appendToTail(21);
+		
+		n.displayNodes();
+		
+		n.isPallindrome(n);
+	}
+
+}
+
