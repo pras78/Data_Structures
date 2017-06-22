@@ -1,0 +1,47 @@
+package Sample;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+public class PrimeNumberInAnArray {
+
+	void displayArray(int[] number) {
+
+		Map<Integer, String> map = (Map<Integer, String>) new HashMap();
+		// int[] array=new int[number.length];
+		int i = 0;
+		for (int s : number) {
+			map.put(s, checkIfPrimeArray(s));
+
+		}
+
+		Iterator it = map.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			System.out.println(pair.getKey() + " " + pair.getValue());
+		}
+
+	}
+
+	public String checkIfPrimeArray(int number) {
+
+		for (int i = 2; i < number; i++) {
+
+			if (number % i == 0)
+				return "Is not a prime number";
+		}
+		return "Is a prime number";
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		PrimeNumberInAnArray number = new PrimeNumberInAnArray();
+
+		int[] array = { 23, 7, 8, 121, 113, 4, 6, 1, 2 };
+		number.displayArray(array);
+
+	}
+
+}
