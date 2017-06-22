@@ -1,0 +1,32 @@
+package Sample;
+
+public class StringReverse {
+
+	static void displayReverseString(String array) {
+
+		String str = String.copyValueOf(performReverse(array));
+		System.out.println("Reversed String is: " + str);
+
+	}
+
+	static char[] performReverse(String abc) {
+
+		String str = abc;
+		char[] array = str.trim().toCharArray();
+		char[] array2 = new char[array.length];
+		int size = array.length;
+		for (int i = size - 1, j = 0; i >= 0; i--, j++) {
+			array2[j] = array[i];
+			// System.out.println(array2[j]);
+			if (j == size - 1) {
+				break;
+			}
+		}
+		return array2;
+	}
+
+	public static void main(String[] args) {
+			displayReverseString("hello");
+	}
+
+}
