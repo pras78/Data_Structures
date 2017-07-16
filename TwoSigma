@@ -1,0 +1,57 @@
+package com.string.manipulations;
+
+public class TwoSigma {
+
+	public static boolean compareRegex(String str1, String str2) {
+
+		char[] array1 = str1.trim().toCharArray();
+		char[] array2 = str2.trim().toCharArray();
+		int i = 0, j = 0;
+
+		while (i < array1.length && j != array2.length) {
+			char val = array1[i];
+			if (array2[j] != val) {
+
+				if (array2[j] == '*') {
+					if (j == array2.length - 1) {
+						return true;
+					}
+					i++;
+					j++;
+				} else if (array2[j] == '?') {
+					i++;
+					j++;
+				} else {
+					return false;
+				}
+			} else if (val == array2[j]) {
+				i++;
+				j++;
+			}
+
+		}
+
+		if (i == j && j == array2.length) {
+			return true;
+		} else if (array2.length > array1.length) {
+
+			while (j < array2.length) {
+				char z = array2[j];
+				if (z == '*')
+					j++;
+				else {
+					return false;
+				}
+
+			}
+			return true;
+		} else
+			return false;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(compareRegex("abc", "bns"));
+
+	}
+
+}
