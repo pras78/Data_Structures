@@ -1,0 +1,46 @@
+package com.string.manipulations;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+public class SegmentDictionary {
+
+	static boolean splitDict(String str, List<String> dictionary) {
+
+		SortedSet<String> dict;
+		dict = new TreeSet<String>(dictionary);
+		StringBuffer string = new StringBuffer(str);
+
+		for (String sorted : dict) {
+			System.out.println(sorted);
+			int i = string.indexOf(sorted);
+			if (i != -1) {
+				string.delete(i, i + sorted.length());
+
+			}
+
+		}
+		System.out.println("----" + string);
+
+		if (string.length() == 0) {
+			return true;
+		}
+
+		return false;
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String[] array = { "hello", "how", "bed", "bath", "and", "apple",
+				"beyond" };
+		List<String> list = Arrays.asList(array);
+
+		System.out.println(splitDict("bedbathandbeyond", list));
+
+	}
+
+}
