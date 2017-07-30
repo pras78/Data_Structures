@@ -1,0 +1,64 @@
+package com.string.manipulations;
+
+import java.util.StringTokenizer;
+
+public class StringWordsReverse {
+
+	public String reverseWords(String str) {
+
+		StringTokenizer st = new StringTokenizer(str, " ");
+		System.out.println(st.countTokens());
+
+		Stack stack = new Stack(500);
+		StringBuffer sb = new StringBuffer();
+		while (st.hasMoreTokens()) {
+
+			stack.push(st.nextToken());
+		}
+
+		do {
+
+			sb.append(" ");
+			sb.append(stack.pop());
+
+		} while (stack.top != -1);
+
+		return sb.toString().trim();
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		StringWordsReverse swr = new StringWordsReverse();
+		String[] a = { "This", "is", "a java program" };
+		System.out.println(swr.reverseWords("Hello Darkness My Old Friend"));
+
+	}
+
+}
+
+class Stack {
+
+	String[] array;
+	int top = -1;
+
+	Stack(int s) {
+		int size = s;
+		array = new String[size];
+		top = -1;
+
+	}
+
+	void push(String num) {
+		array[++top] = num;
+
+	}
+
+	String pop() {
+		if (top != -1) {
+			return array[top--];
+		}
+		return null;
+	}
+
+}
