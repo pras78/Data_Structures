@@ -1,0 +1,64 @@
+public class MirrorImage {
+
+	public String returnSubstring(String str) {
+
+		char[] arr = str.toCharArray();
+		Stack stack = new Stack(str.length());
+
+		for (char s : arr) {
+			stack.push(String.valueOf(s));
+		}
+
+		StringBuffer stak = new StringBuffer();
+		String val;
+
+		for (int i = 0; i < str.length(); i++) {
+			String k = stack.pop();
+			val = stak + k;
+			System.out.println(val);
+
+			if (str.substring(0, i + 1).equals(val)) {
+				stak.append(k);
+				System.out.println(stak);
+				continue;
+			} else {
+
+				break;
+
+			}
+		}
+
+		return stak.toString();
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		MirrorImage mi = new MirrorImage();
+
+		System.out.println("Final answer: " + mi.returnSubstring("abcVBSgcba"));
+	}
+}
+
+class Stack {
+
+	String[] array;
+	int top;
+
+	public Stack(int s) {
+		int size = s;
+		array = new String[size];
+		top = -1;
+	}
+
+	public void push(String val) {
+		array[++top] = val;
+	}
+
+	public String pop() {
+		if (top != -1)
+			return array[top--];
+		return null;
+	}
+}
