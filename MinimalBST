@@ -1,0 +1,87 @@
+public class ArrayToBalancedBST  {
+	
+	
+	static TreeNode root;
+	
+	
+	TreeNode createMinimalBST(int array[]) {
+		
+		return createMinimumBST(array, 0, array.length-1);
+		
+	}
+	
+	TreeNode createMinimumBST(int arr[], int start, int end) {
+		
+		
+		
+		if(end<start) {
+			
+			return null;
+			
+		}
+		
+		
+		int mid=(start+end)/2;
+		
+		
+		TreeNode n = new TreeNode (arr[mid]);
+		n.left = createMinimumBST(arr, start, mid-1);
+		n.right = createMinimumBST(arr, mid+1, end);
+		
+		return n;
+//methods to traverse thru the created tree	
+	}
+	
+	
+	void inOrder(TreeNode node) { 
+        if (node == null) { 
+            return; 
+        } 
+       
+        inOrder(node.left); 
+        System.out.print(node.data + " "); 
+        inOrder(node.right); 
+    } 
+     
+	
+	
+	void preOrder(TreeNode node) { 
+        if (node == null) { 
+            return; 
+        } 
+        System.out.print(node.data + " "); 
+        preOrder(node.left); 
+        preOrder(node.right); 
+    } 
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		ArrayToBalancedBST tree = new ArrayToBalancedBST(); 
+	        int arr[] = new int[]{1, 2, 3, 4, 5, 6, 7}; 
+	        root = tree.createMinimalBST(arr); 
+	        System.out.println("Preorder traversal of constructed BST"); 
+	        tree.preOrder(root); 
+	
+	}
+
+}
+
+
+
+// TreeNode class to utilize for creating tree
+
+
+public class TreeNode {
+	   
+	    int data; 
+	    TreeNode left, right; 
+	      
+	    TreeNode(int d) { 
+	        data = d; 
+	        left = right = null; 
+	    } 
+	
+
+}
