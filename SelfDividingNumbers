@@ -1,0 +1,84 @@
+package com.leet.code;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class SelfDividingNumbers {
+
+
+	public static List<Integer> selfDividingNumbers(int left, int right) {
+
+		List<Integer> selfDivList = new ArrayList<Integer>();
+
+		if(left<right) {
+
+			if(left<10 && right>10) {
+				selfDivList=IntStream.range(left, 10).boxed().collect(Collectors.toList());
+				selfDivList.addAll(findVals(11,right));
+
+			}
+
+			else if(left>10 && right>10) {
+				selfDivList.addAll(findVals(left,right));
+			}
+
+
+			else if(left<10 && right<10) {
+				selfDivList=IntStream.range(1, right+1).boxed().collect(Collectors.toList());
+			}
+		}
+
+
+		else {
+			return selfDivList;
+		}
+		return selfDivList;
+
+	}	
+
+	public static List<Integer> findVals(int left, int right){
+
+		List<Integer> selfDivList= new ArrayList<Integer>();
+		for(int i=left;i<=right;i++) {
+			boolean flag=true;
+			int j=i;
+			while(j>0) {
+				int total=i;
+				int val=j%10;
+				if(val!=0) {
+					j=j/10;
+					if(!(total%val==0)) {
+						flag=false;
+
+					}
+
+				}
+				else if(val==0){
+					flag=false;
+					break;
+				}						
+			}
+
+			if(flag==true) {
+				selfDivList.add(i);
+			}
+
+		}
+		return selfDivList;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+
+		List<Integer> k =selfDividingNumbers(4,96);
+
+		System.out.println(k);
+
+
+
+	}
+
+}
