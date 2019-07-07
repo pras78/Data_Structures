@@ -1,0 +1,23 @@
+package com.leet.code;
+
+public class DefangingIP {
+
+
+	public static String defangIPaddr(String address) {
+
+
+		return address.replaceAll("\\.", "[.]");
+
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+
+		String address="255.255.0.0";
+
+		System.out.println("The defanged address is: " +defangIPaddr(address));
+	}
+
+}
