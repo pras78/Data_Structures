@@ -1,0 +1,55 @@
+package com.leet.code;
+
+public class RemoveVowels {
+	
+	//Solution 1
+		public static String removeVowels(String string) {
+			
+		return	string.replaceAll("[aeiou]", "");
+			
+			
+		}
+	
+	//Solution 2
+	public static String removeVowels2(String string) {
+		
+		char[] array = string.toCharArray();
+		
+		
+		for(int i=0; i<array.length;i++) {
+			
+			if(array[i]=='a'||array[i]=='e'||array[i]=='i'||array[i]=='o' ||array[i]=='u' )
+			{
+				
+				array[i]='9'; // random value in the string assuming 
+				//there are no digits in the string
+				
+				
+			}
+			
+			
+			string=String.copyValueOf(array);
+			string=string.replaceAll("9" , "");
+			
+		}
+		
+		return string;
+		
+		
+		
+	}
+	
+	
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		String s="Testing this";
+		
+		System.out.println(removeVowels(s));
+		
+
+	}
+
+}
