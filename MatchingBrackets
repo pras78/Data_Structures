@@ -1,0 +1,54 @@
+package com.leet.code;
+
+import java.util.Stack;
+
+public class MatchingBrackets {
+
+
+
+
+	static boolean matchParan(String str) {
+		Stack st= new Stack();
+
+
+		for(int i=0;i<str.length();i++) {
+
+			char k=str.charAt(i);
+
+
+			if(k=='[' || k=='(') {
+				st.push(k);
+
+
+
+			}
+			else {
+
+				if(st.empty()==true && (k==']' || k==')' )) {
+
+					return false;
+				}
+
+				char popped=(char)st.pop();
+				if(k==']' && popped != '[' || k==')' && popped !='(') {
+					System.out.println("here");
+					return false;
+				}
+			}
+
+
+		}
+
+		return true;
+
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String str="][(([]))]()]";
+		System.out.println(matchParan(str));
+	}
+
+}
