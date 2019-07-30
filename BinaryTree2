@@ -1,0 +1,153 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Node<T> {
+
+
+	private T data;
+
+	//private List<Node<T>> children=new ArrayList<Node<T>>();
+	private Node<T> parent=null;
+	private Node<T> left=null;
+	private Node<T> right=null;
+	static List<Node> list= new ArrayList<Node>();
+
+
+	Node(T data){
+
+		this.data=data;
+
+	}
+
+
+	Node<T> addLeftChild(Node<T> child){
+
+		child.setParent(this);
+
+		this.left=child;
+
+		return child;
+
+
+	}
+
+	Node<T> addRightChild(Node<T> child){
+
+		child.setParent(this);
+
+		this.right=child;
+
+		return child;
+
+
+	}
+
+
+
+	void addChildren(List<Node<T>> children) {
+
+
+		children.forEach(child->child.setParent(this));
+
+		this.left=children.get(0);
+		this.right=children.get(1);
+
+
+
+	}
+
+
+	void setParent(Node<T> parent) {
+		this.parent=parent;
+
+
+	}
+
+
+	T getData() {
+		return data;
+
+	}
+
+
+	void setData(T data) {
+		this.data=data;
+
+	}
+
+
+	Node<T> getParent(){
+
+		return parent;
+
+	}
+
+
+	Node[] getChildren() {
+
+		parent=this;
+		Node[] array= {parent.left, parent.right};
+
+		return array;
+
+	}
+
+	List<Node> getTree(){
+
+		parent=this;
+		parent.getAllChildren();
+
+		return list;
+	}
+
+	Node getAllChildren() {
+
+
+		parent=this;
+
+		if(parent.left!=null) {
+
+			parent=this.left;
+			parent=parent.getAllChildren();
+
+		}
+
+
+		if(this.right!=null) {
+			parent=this.right;
+			parent=parent.getAllChildren();
+
+		}
+		list.add(this);
+		return parent;
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+
+		Node<Integer> root = new Node<Integer>(25);
+		Node<Integer> child1=root.addLeftChild(new Node(45));
+		Node<Integer> child2=root.addRightChild(new Node(49));
+		Node<Integer> child4=child1.addRightChild(new Node(67));
+		Node<Integer> child3=child1.addLeftChild(new Node(78));
+		System.out.println(child3.getData());
+
+		System.out.println("Printing children of root");
+		Node[] array=child3.getChildren();
+		for(Node k: array) {
+			if(k!=null)
+				System.out.println(k.getData());
+		}
+		List<Node> list=root.getTree();
+
+		System.out.println("Printing the whole tree");
+		for(Node t: list) {
+			System.out.println(t.getData());
+
+		}
+
+	}
+
+}
