@@ -1,0 +1,81 @@
+
+import java.util.LinkedList;
+
+public class QueuedWords {
+
+	LinkedList<Character> queue[];
+	private int size;
+
+
+	QueuedWords(int k){
+		size=k;
+		queue= new LinkedList[k];
+		for(int i=0;i<k;i++) {
+			queue[i]=new LinkedList<Character>() ;
+
+		}
+
+	}
+
+	String returnQueuedWords(String str, int k) {
+
+		StringBuffer sb=new StringBuffer();
+
+
+		char[] array=str.toCharArray();
+		int p=-1;
+		int i=0;
+		boolean asc=true;
+		while(i<=str.length()-1)	{
+
+			if(asc==true && p<k) {
+				queue[++p].add(array[i]);
+				i++;
+				if(p==(k-1)) {
+					asc=false;
+
+				}
+
+			}
+
+			if(asc==false && p>-1 ) {
+				queue[--p].add(array[i]);
+				i++;
+				if(p==0) {
+					asc=true;
+
+				}
+
+			}
+
+		}
+
+		int t=0;
+		while(queue.length>0 && t<size) {
+
+			while(queue[t].size()>0) {
+				char u=queue[t].poll();
+				sb.append(u);
+			}
+
+			t++;
+		}
+
+		return sb.toString();
+
+	}
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		QueuedWords q= new QueuedWords(4);
+
+		String k=q.returnQueuedWords("Hello World!", 4);
+		System.out.println(k);
+
+
+
+	}
+
+}
