@@ -1,0 +1,112 @@
+class Solution {
+  public static String convertToFull(String s, int val) {
+		StringBuilder sb= new StringBuilder();
+		for(int i=0;i<val;i++) {
+			sb.append(s);	
+			
+		}
+		return sb.toString();
+
+
+	}
+
+	public static String decodeString(String str) {
+		StringBuilder finalString=new StringBuilder();
+		Stack stack1=new Stack();
+		Stack stack2=new Stack();
+		int i=0;
+		while(i<str.length()) {
+			char val=str.charAt(i);
+
+			if(val=='[') {
+				stack1.push('[');
+				i++;
+			}
+
+			else if(val==']') {
+				StringBuilder sb=new StringBuilder();
+				while(!stack1.isEmpty()) {
+					if(stack1.peek().getClass().getName()=="java.lang.String") {
+
+						stack2.push(stack1.pop());
+
+					}
+					else {
+						char k=(Character)stack1.peek();
+
+						if(k=='[') {
+
+							stack1.pop();
+							break;
+
+						}
+						else {
+							stack2.push(stack1.pop());
+						}
+					}
+				}
+				while(!stack2.isEmpty()) {
+					sb.append(stack2.pop());
+
+				}
+				StringBuilder numStr=new StringBuilder();
+				//Getting the numeric val to convert to
+
+				while(!stack1.isEmpty()) {
+
+					String type=stack1.peek().getClass().getName();
+
+					if(type=="java.lang.String") {
+
+						break;
+					}
+					char k=(Character)stack1.peek();
+
+					if(k=='[') {
+
+						break;
+					}
+					else if(Character.isDigit(k)){
+						numStr=numStr.append(k);
+
+						stack1.pop();
+
+					}
+					else {
+						break;
+					}
+
+				}
+
+
+
+				int number=Integer.parseInt(numStr.reverse().toString());
+
+				String convertedString=convertToFull(sb.toString(), number);
+				stack1.push(convertedString);
+
+				i++;
+
+			}
+			else {
+
+				stack1.push(val);
+				i++;
+			}
+
+
+		}
+
+		while(!stack1.isEmpty()) {
+			stack2.push(stack1.pop());
+
+
+		}
+		while(!stack2.isEmpty()) {
+			finalString=finalString.append(stack2.pop());
+		}
+
+		return finalString.toString();
+
+	}
+}
