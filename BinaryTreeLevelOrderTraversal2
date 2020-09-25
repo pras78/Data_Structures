@@ -1,0 +1,28 @@
+class Solution {
+   
+    List<List<Integer>> result = new ArrayList<List<Integer>>();
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        
+        getLevelOrderTraversal(root, 0);
+        
+        return result;
+        
+    }
+    
+    void getLevelOrderTraversal(TreeNode root, int level){
+        
+        if(root==null) return;
+        
+        if(level == result.size()){
+            result.add(new ArrayList<Integer>());
+        
+            
+        }
+        
+        result.get(level).add(root.val);
+        getLevelOrderTraversal(root.left, level+1);
+        getLevelOrderTraversal(root.right, level+1);
+    }
+    
+    
+}
